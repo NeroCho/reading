@@ -1,24 +1,32 @@
-// const _baseUrl = 'http://192.168.0.73:809/api/music'
-const _baseUrl = 'http://musicapi.duapp.com/api.php'
-const _baseUrl2 = 'https://api.imjad.cn/cloudmusic'
-//http://musicapi.duapp.com/api.php?type=topPlayList&cat=%E5%85%A8%E9%83%A8&offset=0&limit=6
+const _gankio = 'http://gank.io/api'
 export default {
-  getPlayListByWhere (cat, order, offset, total, limit) {
-    return _baseUrl + '?type=topPlayList&cat=' + cat + '&order=' + order + '&offset=' + offset + '&total=' + total + '&limit=' + limit
-  },
-  getLrc (id) {
-    return _baseUrl2 + '?type=lyric&id=' + id
-  },
-  getSong (id) {
-    return _baseUrl2 + '?id=' + id
-  },
-  getPlayListDetail (id) {
-    return _baseUrl2 + '?type=playlist&id=' + id
-  },
-  getMv (id) {
-    return _baseUrl2 + '?type=mv&id=' + id
-  },
-  search (words) {
-    return _baseUrl2 + '?type=search&s=' + words
-  }
+	getDaily(year, month, day) {
+		if (!year || !month || !day) {
+			let current = new Date();
+			if (current.getDay() === 6) {
+				current.setDate(current.getDate() - 1)
+			}
+			if (current.getDay() === 7) {
+				current.setDate(current.getDate() - 2)
+			}
+			year = current.getFullYear()
+			month = current.getMonth() + 1
+			if (current.getHours() >= 12) {
+				day = current.getDate()
+			} else {
+				day = current.getDate() - 1
+			}
+
+		}
+		return `${_gankio}/day/${year}/${month}/${day}`
+	},
+
+	getGank(type, pageCount = 10, pageNumber = 1) {
+		return `${_gankio}/data/${type}/${pageCount}/${pageNumber}`
+	},
+
+	getGirls(pageCount = 10, pageNumber = 1) {
+		const type = '福利'
+		return `${_gankio}/data/${type}/${pageCount}/${pageNumber}`
+	}
 }
