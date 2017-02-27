@@ -44,7 +44,7 @@
 				list: [],
 				loading: false,
 				scroller: null,
-				height: window.screen.availHeight - 56 - 48 - 10
+				height: window.innerHeight - 56 - 48 - 10
 			}
 		},
 		components: {

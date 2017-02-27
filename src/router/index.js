@@ -9,16 +9,27 @@ const router = new VueRouter({
 	mode: 'history',
 	routes: [{
 		path: '/index',
+		name:'home',
 		component: require('../views/index'),
 		children: [{
 			path: 'main',
-			component: require('../views/main')
+			name:'container',
+			component: require('../views/main'),
+			// children: [{
+			// 	name:'info',
+			// 	path: 'urldetail',
+			// 	component: require('../components/detail')
+			// }]
 		}, {
 			path: 'movies',
 			component: require('../views/movies')
 		}, {
 			path: 'books',
 			component: require('../views/books')
+		},{
+			name:'gankinfo',
+			path: '/gankdetail/:url',
+			component: require('../views/gankDetail')
 		}]
 	}, {
 		path: '*',

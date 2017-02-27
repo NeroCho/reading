@@ -105,8 +105,7 @@
 				frontEnd: [],
 				ios: [],
 				android: [],
-				vedio: '',
-				windowheight: window.innerHeight
+				vedio: ''
 			}
 		},
 		components: {

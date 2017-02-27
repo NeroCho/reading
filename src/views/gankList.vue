@@ -12,17 +12,17 @@
 			</mu-row>
 		</div>
 
-		<div class="infinite-container"  v-bind:style="{  height: height + 'px' }">
-			<mu-card class="my-card" v-for="item of list">
-				<mu-card-header :title="item.who">
-				</mu-card-header>
-				<mu-card-media v-if="item.images && item.images.length>0">
-					<img :src="item.images[0]" />
-				</mu-card-media>
-				<mu-card-text>
-					{{item.desc}}
-				</mu-card-text>
-			</mu-card>
+		<div class="infinite-container" v-bind:style="{ height: height + 'px' }">
+			<mu-list>
+				<template v-for="item of list">
+					<mu-list-item :title="item.who" @click="cardClick(item.url)">
+						<mu-avatar v-if="item.images && item.images.length>0" :src="item.images[0]+'?imageView2/0/w/80'" slot="leftAvatar" />
+						<span slot="describe">{{item.desc}}</span>
+					</mu-list-item>
+					<mu-divider />
+				</template>
+			</mu-list>
+
 			<mu-infinite-scroll :scroller="scroller" :loading="loading" @load="getGank" />
 		</div>
 		<mu-bottom-sheet :open="bottomSheet" @close="closeBottomSheet">
@@ -89,7 +89,7 @@
 				list: [],
 				loading: false,
 				scroller: null,
-				height:window.screen.availHeight-56-41-48-10
+				height: window.innerHeight - 56 - 41 - 48 - 10
 			}
 		},
 		components: {
@@ -127,9 +127,14 @@
 					this.pageNumber++
 					this.loading = false
 				})
+			},
+			cardClick(url) {
+				// console.log(url)
+				this.$router.push({ name: 'gankinfo', params: { url: url } })
 			}
 		},
 		computed: {
+
 		}
 	}
 </script>
