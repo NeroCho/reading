@@ -1,6 +1,6 @@
 # reading
 
-> 还没想好，暂时这样（A Vue.js project ）
+> 一个基于vue 移动端 练习的demo。
 
 ## Build Setup
 
